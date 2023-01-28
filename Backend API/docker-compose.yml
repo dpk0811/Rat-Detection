@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  app:
+    platform: linux/aarch64
+    container_name: cloud-app-container
+    image: cloud-app:1.0
+    build: ./
+    ports:
+      - "8083:8083"
+    depends_on:
+      - postgres
+  postgres:
+    platform: linux/aarch64
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgresdb
